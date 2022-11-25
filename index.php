@@ -6,36 +6,113 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/aa25eb13aa.js" crossorigin="anonymous"></script>
     <title>S.V Doeltreffend</title>
 </head>
 <body>
-    <h1>S.V Doeltreffend</h1>
-    <?php if (isset($error)): ?>
-        <span class="error"><?= $error ?></span>
-    <?php endif; ?>
-    <?php if (isset($weapens)): ?>
-    <table>
-        <thread>
-            <tr>
-                <th>#</th>
-                <th>Naam</th>
-            </tr>
-        </thread>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="index.php">
+                <img src="https://bulma.io/images/bulma-logo.png" alt="Logo picture" width="112" height="28">
+            </a>
+        </div>
 
-        <tfoot>
-        <tr>
-            <td colspan="2">yes</td>
-        </tr>
-        </tfoot>
-        <tbody>
-        <?php foreach ($weapens as $weapen): ?>
-            <tr>
-                <td> <?= $weapen->id; ?></td>
-                <td> <?= $weapen->name; ?></td>
-            </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
+        <div class="navbar-start">
+            <a href="index.php" class="navbar-item">
+                <span class="icon-text">
+                    <span class="icon">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </span>
+                    <span>Reserveren</span>
+                </span>
+            </a>
+            <a href="aboutus.php" class="navbar-item">
+                <span class="icon-text">
+                    <span class="icon">
+                        <i class="fa-solid fa-user-group"></i>
+                    </span>
+                    <span>Over ons</span>
+                </span>
+            </a>
+            <a href="contact.php" class="navbar-item">
+                <span class="icon-text">
+                    <span class="icon">
+                        <i class="fa-solid fa-phone"></i>
+                    </span>
+                    <span>Contact</span>
+                </span>
+            </a>
+        </div>
+
+        <div class="navbar-end">
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+
+                </a>
+
+                <div class="navbar-dropdown is-right">
+                    <a class="navbar-item" href="pofile.php">
+                        Profiel
+                    </a>
+                    <hr class="navbar-divider">
+                    <a class="navbar-item" href="logout.php">
+                        Logout
+                    </a>
+                </div>
+            </div>
+            <a class="navbar-item" href="pofile.php">
+                <i class="fa-solid fa-user"></i>
+            </a>
+        </div>
+    </nav>
+    <?php if (!empty($errors)): ?>
+        <section class="content">
+            <ul class="notification is-danger">
+                <?php foreach ($errors as $error): ?>
+                    <li><?= $error; ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </section>
     <?php endif; ?>
+    <?php if (isset($weapons)): ?>
+    <div class="columns is-multiline">
+        <?php foreach ($weapons as $index => $weapen): ?>
+        <div class="column is-one-quarter">
+            <div class="card m-3">
+                <div class="card-image">
+                    <figure class="image is-4by3">
+                        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Picture of weapon">
+                    </figure>
+                </div>
+                <div class="card-content">
+                    <div class="is-justify-content-center">
+                        <div class="media">
+                            <div class="media-content">
+                                <h2 class="title is-3"><?= $weapen->name; ?></h2>
+                                <p class="subtitle is-5"><?= $weapen->day; ?></p>
+                            </div>
+                            <a href="detail.php?id=<?= $index; ?>" class="button is-primary">
+                                Reserveren
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
+    <footer class="footer has-background-dark">
+        <div class="content has-text-centered has-text-white">
+            <p>
+                S.V. Doeltreffend reserserveringsysteem gemaakt door <a href="https://github.com/RadiazOm">Jeffrey van Otterloo</a>. Deze website is gemaakt met
+                <a href="https://bulma.io">Bulma</a>
+                <br>
+                © S.V. Doeltreffend
+            </p>
+        </div>
+    </footer>
 </body>
 </html>

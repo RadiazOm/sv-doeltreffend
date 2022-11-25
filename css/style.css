@@ -1,0 +1,7 @@
+.is-primary {
+    background-color: #414BB2 !important;
+}
+
+a.is-primary:hover {
+    background-color: #343c8f !important;
+}

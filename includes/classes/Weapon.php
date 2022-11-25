@@ -3,12 +3,12 @@
 class Weapon
 {
     /**
-     * @param string $id
      * @param string $name
+     * @param string $day
      */
     public function __construct(
-        public string $id,
-        public string $name
+        public string $name,
+        public string $day
     )
     {}
 }
