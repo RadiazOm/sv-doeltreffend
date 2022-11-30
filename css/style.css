@@ -5,3 +5,18 @@
 a.is-primary:hover {
     background-color: #343c8f !important;
 }
+
+input[type="radio"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none!important;
+    appearance: none!important;
+    /* For iOS < 15 to remove gradient background */
+    background-color: #414BB2!important;
+    /* Not removed via appearance */
+}
+
+input.is-active {
+    background-color: red !important;
+}
+
+
