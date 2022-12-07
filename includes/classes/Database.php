@@ -1,8 +1,7 @@
-<?php namespace StudentsList\Databases;
+<?php
 
 /**
  * Class Database
- * @package StudentsList\Databases
  */
 class Database
 {

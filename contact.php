@@ -53,7 +53,7 @@
                 </a>
 
                 <div class="navbar-dropdown is-right">
-                    <a class="navbar-item" href="pofile.php">
+                    <a class="navbar-item" href="profile.php">
                         Profiel
                     </a>
                     <hr class="navbar-divider">
@@ -62,7 +62,7 @@
                     </a>
                 </div>
             </div>
-            <a class="navbar-item" href="pofile.php">
+            <a class="navbar-item" href="profile.php">
                 <i class="fa-solid fa-user"></i>
             </a>
         </div>
@@ -85,38 +85,38 @@
                         <h2 class="notification is-success has-text-centered mx-6">Verzonden!</h2>
                     <?php endif; ?>
                     <div class="field m-6">
-                        <label class="label">Naam</label>
+                        <label class="label" for="name">Naam</label>
                         <div class="control has-icons-left has-icons-right">
-                            <input class="input is-info" type="text" placeholder="Naam" value="">
+                            <input class="input is-info" type="text" placeholder="Naam" value="" id="name">
                             <span class="icon is-small is-left">
                                 <i class="fas fa-user"></i>
                             </span>
                         </div>
                     </div>
                     <div class="field m-6">
-                        <label class="label">E-mail</label>
+                        <label class="label" for="email">E-mail</label>
                         <div class="control has-icons-left has-icons-right">
-                            <input class="input is-info" type="text" placeholder="E-mail" value="">
+                            <input class="input is-info" type="text" placeholder="E-mail" value="" id="email">
                             <span class="icon is-small is-left">
                                 <i class="fas fa-envelope"></i>
                             </span>
                         </div>
                     </div>
                     <div class="field m-6">
-                        <label class="label">Onderwerp</label>
+                        <label class="label" for="subject">Onderwerp</label>
                         <div class="control">
                             <div class="select">
-                                <select>
-                                    <option>Technisch probleem</option>
-                                    <option>Anders</option>
+                                <select id="subject" name="subject">
+                                    <option value="technical">Technisch probleem</option>
+                                    <option value="other">Anders</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="field m-6">
-                        <label class="label">Bericht</label>
+                        <label class="label" for="message">Bericht</label>
                         <div class="control">
-                            <textarea class="textarea" placeholder="Bericht"></textarea>
+                            <textarea class="textarea" placeholder="Bericht" id="message" name="message"></textarea>
                         </div>
                     </div>
                     <div class="field m-6">
@@ -128,5 +128,15 @@
             </div>
         </div>
     </div>
+    <footer class="footer has-background-dark">
+        <div class="content has-text-centered has-text-white">
+            <p>
+                S.V. Doeltreffend reserserveringsysteem gemaakt door <a href="https://github.com/RadiazOm">Jeffrey van Otterloo</a>. Deze website is gemaakt met
+                <a href="https://bulma.io">Bulma</a>
+                <br>
+                © S.V. Doeltreffend
+            </p>
+        </div>
+    </footer>
 </body>
 </html>

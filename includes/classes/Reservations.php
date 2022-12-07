@@ -10,9 +10,9 @@ class Reservations
         return $this->reservations;
     }
 
-    public function addReservation(array $value): void
+    public function setReservations(array $reservations): void
     {
-        $this->reservations[] = new Reservation($value['lane'], $value['weapon'], $value['date'], $value['time'], $value['user_id']);
+        $this->reservations = $reservations;
     }
 
     public function getTotalReservations(): int

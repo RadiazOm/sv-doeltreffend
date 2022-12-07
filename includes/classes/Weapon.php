@@ -2,13 +2,7 @@
 
 class Weapon
 {
-    /**
-     * @param string $name
-     * @param string $day
-     */
-    public function __construct(
-        public string $name,
-        public string $day
-    )
-    {}
+    public int $id;
+    public string $name;
+    public string $days;
 }

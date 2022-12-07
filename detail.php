@@ -54,7 +54,7 @@
             </a>
 
             <div class="navbar-dropdown is-right">
-                <a class="navbar-item" href="pofile.php">
+                <a class="navbar-item" href="profile.php">
                     Profiel
                 </a>
                 <hr class="navbar-divider">
@@ -63,7 +63,7 @@
                 </a>
             </div>
         </div>
-        <a class="navbar-item" href="pofile.php">
+        <a class="navbar-item" href="profile.php">
             <i class="fa-solid fa-user"></i>
         </a>
     </div>
@@ -90,7 +90,7 @@
                 <?php if (isset($weapon)): ?>
                     <h1 class="title is-1"><?= $weapon->name ?></h1>
                 <?php endif; ?>
-                <form action="detail.php?id=<?= $id ?>" class="field" method="post">
+                <form action="detail.php?id=<?= $id ?>&date=<?= $date ?>&month=<?= $monthsBack ?>" class="field" method="post">
                     <div class="field m-6">
                         <label for="lane"></label>
                         <div class="control">
@@ -114,19 +114,33 @@
                     <div class="field m-6">
                         <div class="control" id="radiobuttons">
                             <label for="rad1" class="button">
-                                <input id="rad1" type="radio" name="question">
+                                <input id="rad1" type="radio" name="stance" value="standing">
                                 Staand
                             </label>
                             <label for="rad2" class="button">
-                                <input id="rad2" type="radio" name="question">
+                                <input id="rad2" type="radio" name="stance" value="kneeling">
                                 Knielend
                             </label>
                             <label for="rad3" class="button">
-                                <input id="rad3" type="radio" name="question">
+                                <input id="rad3" type="radio" name="stance" value="laying">
                                 Liggend
                             </label>
                         </div>
                     </div>
+                    <div class="field m-6">
+                        <div class="control">
+                            <label for="time">
+                                <input type="time" id="time" name="time" class="input"
+                                       min="09:00" max="18:00" required>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="field m-6">
+                        <div class="control">
+                            <input type="submit" name="submit" value="Sturen" class="button is-link">
+                        </div>
+                    </div>
+
                 </form>
             </div>
         </div>
@@ -135,7 +149,12 @@
 
         <div class="columns">
             <div class="column">
-                <table class="table is-fullwidth">
+                <div class="is-flex is-justify-content-space-around">
+                    <a href="detail.php?id=<?= $id ?>&date=<?= $date ?>&month=<?= $monthsBack + 1?>"><i class="fa-solid fa-arrow-left"></i></a>
+                    <h1 class="title is-1"><?= $month ?></h1>
+                    <a href="detail.php?id=<?= $id ?>&date=<?= $date ?>&month=<?= $monthsBack - 1?>"><i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                    <table class="table is-fullwidth">
                     <thead>
                         <tr>
                             <td>Zo</td>
@@ -154,7 +173,7 @@
                         </tr>
                         <tr>
                             <?php endif; ?>
-                            <td><?php if($i > $day - 1 && $i <= $monthLength + $day - 1): ?><a class="button is-outlined is-info" href="detail.php?id=<?= $id ?>&date=<?php echo $i - $day + 1;?>"><?php echo  $i - $day + 1; ?></a> <?php endif; ?></td>
+                            <td><?php if($i > $day - 1 && $i <= $monthLength + $day - 1): ?><a class="button is-outlined is-info" href="detail.php?id=<?= $id ?>&date=<?php echo $i - $day + 1;?>&month=<?= $monthsBack ?>"><?php echo  $i - $day + 1; ?></a> <?php endif; ?></td>
                     <?php endfor; ?>
                         </tr>
                     </tbody>
@@ -162,10 +181,21 @@
                 <!-- todo make calender thingy -->
             </div>
             <div class="column">
+
                 <!-- todo make time selection thingy -->
             </div>
         </div>
     </div>
 </div>
+<footer class="footer has-background-dark">
+    <div class="content has-text-centered has-text-white">
+        <p>
+            S.V. Doeltreffend reserserveringsysteem gemaakt door <a href="https://github.com/RadiazOm">Jeffrey van Otterloo</a>. Deze website is gemaakt met
+            <a href="https://bulma.io">Bulma</a>
+            <br>
+            © S.V. Doeltreffend
+        </p>
+    </div>
+</footer>
 </body>
 </html>

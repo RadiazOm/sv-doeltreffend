@@ -1,13 +1,13 @@
 <?php
 
-$weaponsRaw = file_get_contents(DATA_PATH . 'weapons.json');
-$weaponRawList = json_decode($weaponsRaw, true);
+$query = "SELECT * FROM weapons";
+
+$weaponsFromDB = $connection->query($query)
+    ->fetchAll(PDO::FETCH_CLASS, '\\Weapon');
 
 //Create new instance of MusicCollection & add albums
 $arsenal = new Arsenal();
-foreach ($weaponRawList as $weaponRaw) {
-    $arsenal->addWeapon($weaponRaw);
-}
+$arsenal->setWeapons($weaponsFromDB);
 
 //Get formatted albums objects & total
 $weapons = $arsenal->getWeapons();

@@ -10,9 +10,9 @@ class Arsenal
         return $this->weapons;
     }
 
-    public function addWeapon(array $value): void
+    public function setWeapons(array $weapons): void
     {
-        $this->weapons[] = new Weapon($value['name'], $value['day']);
+        $this->weapons = $weapons;
     }
 
     public function getTotalWeapons(): int

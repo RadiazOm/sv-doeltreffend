@@ -1,5 +1,11 @@
 <?php
+
 //Define custom constants to use with project
+const DB_HOST = 'localhost';
+const DB_USER = 'root';
+const DB_PASS = '';
+const DB_NAME = 'sv_doeltreffend';
+
 define('DATA_PATH', dirname(__FILE__) . './data/');
 
 //Custom error handler, so every error will throw a custom ErrorException

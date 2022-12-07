@@ -1,6 +1,10 @@
 <?php
 
+
 require_once 'settings.php';
+require_once 'classes/Database.php';
+require_once 'classes/Form.php';
+require_once 'classes/Forms.php';
 require_once 'classes/Weapon.php';
 require_once 'classes/Arsenal.php';
 require_once 'classes/Reservations.php';
@@ -10,6 +14,9 @@ require_once 'classes/Reservation.php';
 $errors = [];
 
 try {
+    $db = new Database(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    $connection = $db->getConnection();
+
     //Get current filename to load a specific piece of code
     $pathParts = explode('/', $_SERVER['SCRIPT_NAME']);
     $currentFile = dirname(__FILE__) . '/pages/' . $pathParts[count($pathParts) - 1];
