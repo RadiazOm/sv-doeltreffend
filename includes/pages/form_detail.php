@@ -1,5 +1,5 @@
 <?php
 
-require_once dirname(__FILE__) . '/forms.php';
+$db = new DatabaseSelector(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-$form = $forms[$_GET['id'] - 1];
+$form = $db->getFormById($_GET['id']);

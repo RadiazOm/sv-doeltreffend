@@ -1,24 +1,28 @@
 <?php
 
 if (isset($_POST['submit'])) {
-    $subject = $_POST['subject'];
-    $date = date('Y') . '-' . date('n') . '-' . date('j');
-    $time = date('H') . ':' . date('i');
-    $message = $_POST['message'];
+    $form = new Form();
+
+    $form->subject = $_POST['subject'];
+    $form->date = date('Y') . '-' . date('n') . '-' . date('j');
+    $form->time = date('H') . ':' . date('i');
+    $form->question = $_POST['message'];
     // Don't have user table set up yet so i cant do this, therefore we defualt to user 1 :) lucky him
-    $user_id = '1';
+    $form->user_id = '1';
 
-    $query = "INSERT INTO forms (subject, date, time, question, user_id) VALUES ('$subject', '$date', '$time', '$message', '$user_id')";
-    print_r($query);
+    $validator = new FormValidator($form);
+    $validator->validate();
+    $errors = $validator->getErrors();
 
-    $result = $connection->query($query)
-        or die('Error: with query ' . $query . ' :(');
+    if (empty($errors)) {
+        $db = new DatabaseInserter(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-    if ($result) {
-        header('Location: index.php');
-        exit();
-    } else {
-        $errors[] = 'Error: something has gone terribly wrong :(';
+        if ($db->addForm($form)) {
+            header('Location: index.php');
+            exit();
+        } else {
+            $errors[] = 'Database error info: ' . $db->getConnection()->errorInfo()[0];
+        }
     }
 
 }

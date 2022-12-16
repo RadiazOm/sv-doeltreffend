@@ -44,6 +44,22 @@
                     <span>Contact</span>
                 </span>
             </a>
+            <a href="reservations.php" class="navbar-item">
+                <span class="icon-text">
+                    <span class="icon">
+                        <i class="fa-solid fa-clipboard"></i>
+                    </span>
+                    <span>Afspraken</span>
+                </span>
+            </a>
+            <a href="forms.php" class="navbar-item">
+                <span class="icon-text">
+                    <span class="icon">
+                        <i class="fa-solid fa-inbox"></i>
+                    </span>
+                    <span>Formulieren</span>
+                </span>
+            </a>
         </div>
 
         <div class="navbar-end">
@@ -81,9 +97,6 @@
             <div class="box m-6 has-background-light">
                 <form action="" method="post">
                     <h1 class="title is-1 has-text-centered">Contact</h1>
-                    <?php if (isset($_POST['submit'])): ?>
-                        <h2 class="notification is-success has-text-centered mx-6">Verzonden!</h2>
-                    <?php endif; ?>
                     <div class="field m-6">
                         <label class="label" for="name">Naam</label>
                         <div class="control has-icons-left has-icons-right">
@@ -107,6 +120,7 @@
                         <div class="control">
                             <div class="select">
                                 <select id="subject" name="subject">
+                                    <option value="">Kies een onderwerp</option>
                                     <option value="technical">Technisch probleem</option>
                                     <option value="other">Anders</option>
                                 </select>

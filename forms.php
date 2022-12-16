@@ -45,6 +45,22 @@
                     <span>Contact</span>
                 </span>
             </a>
+            <a href="reservations.php" class="navbar-item">
+                <span class="icon-text">
+                    <span class="icon">
+                        <i class="fa-solid fa-clipboard"></i>
+                    </span>
+                    <span>Afspraken</span>
+                </span>
+            </a>
+            <a href="forms.php" class="navbar-item">
+                <span class="icon-text">
+                    <span class="icon">
+                        <i class="fa-solid fa-inbox"></i>
+                    </span>
+                    <span>Formulieren</span>
+                </span>
+            </a>
         </div>
 
         <div class="navbar-end">
@@ -77,6 +93,32 @@
         </ul>
     </section>
 <?php endif; ?>
+    <div class="is-flex is-justify-content-center">
+        <h1 class="title is-1">Formulieren</h1>
+    </div>
+
+    <form action="" method="get" class="is-flex is-justify-content-center m-6">
+        <div class="field has-addons has-addons-centered">
+            <p class="control">
+                <span class="select">
+                    <select name="filter">
+                        <option value="">Sorteer bij</option>
+                        <option value="date">Datum en tijd</option>
+                        <option value="user_id">Naam</option>
+                        <option value="subject">Onderwerp</option>
+                    </select>
+                </span>
+            </p>
+            <div class="control">
+                <input class="input" type="text" placeholder="Vind een formulier" name="query" value="<?= $_GET['query'] ?? '' ?>">
+            </div>
+            <div class="control">
+                <div class="control">
+                    <input type="submit" value="Zoeken" class="button is-link">
+                </div>
+            </div>
+        </div>
+    </form>
 
     <div class="container is-flex is-justify-content-center">
         <table class="table is-striped">
@@ -87,16 +129,17 @@
                 <th>Date</th>
                 <th>Subject</th>
                 <th>Question</th>
-                <th></th>
+                <th>Details</th>
+                <th>Delete</th>
             </tr>
             </thead>
             <tfoot>
             <tr>
-                <td colspan="6" class="has-text-centered">Total: <?= $totalForms ?></td>
+                <td colspan="7" class="has-text-centered">Total: <?= $totalForms ?></td>
             </tr>
             </tfoot>
             <tbody>
-            <?php foreach ($forms as $form) { ?>
+            <?php foreach ($forms as $index => $form) { ?>
                 <tr>
                     <td><?= $form->id ?></td>
                     <td><?= $form->user_id ?></td>
@@ -104,6 +147,7 @@
                     <td><?= $form->subject ?></td>
                     <td><?= mb_strlen($form->question, 'utf8') > 15 ? substr($form->question, 0, 15) . '...' : $form->question; ?></td>
                     <td><a href="form_detail.php?id=<?= $form->id ?>">Details</a></td>
+                    <td><a href="form_delete.php?id=<?= $form->id ?>">Delete</a></td>
                 </tr>
             <?php } ?>
             </tbody>

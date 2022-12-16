@@ -1,52 +1,50 @@
 <?php
 
-require_once dirname(__FILE__) . '/index.php';
+$db = new DatabaseSelector(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-$id = $_GET['id'];
+$weapon = $db->getWeaponById($_GET['id']);
 
 /**
  * @var Weapon[] $weapons
  */
-$weapon = $weapons[$id];
-
+// make calendar
 if (isset($_GET['date'])) {
     $monthsBack = $_GET['month'];
     $date = $_GET['date'];
 } else {
     $monthsBack = 0;
+    $date = date('j', time() - 2628000 * $monthsBack);
 }
 
-$day = date('N', time() - 2628000 * $monthsBack);
-$date = date('j', time() - 2628000 * $monthsBack);
 $monthLength = date('t', time() - 2628000 * $monthsBack);
 $month = date('F', time() - 2628000 * $monthsBack);
-
-$day -= ($date % 7) - 1;
-
-if ($day < 0) {
-    $day = 7 + $day;
-}
+$day = Date::getWeekday($monthsBack, $date);
+// end making calendar
 
 if (isset($_POST['submit'])) {
-    $stance = $_POST['stance'];
-    $time = $_POST['time'];
-    $lane = $_POST['lane'];
-    // Don't have user table set up yet, so I can't do this, therefore we default to user 1 :) lucky him
-    $user_id = '1';
+    $reservation = new Reservation();
+    $reservation->weapon_id = $weapon->id;
+    $reservation->stance = $_POST['stance'];
+    $reservation->time = $_POST['time'];
+    $reservation->lane = $_POST['lane'];
+    $reservation->user_id = '1';
+    $reservation->date = date('y', time() - 2628000 * $monthsBack) . '-' . date('n', time() - 2628000 * $monthsBack) . '-' . $date;
 
-    $today = date('y', time() - 2628000 * $monthsBack) . '-' . date('n', time() - 2628000 * $monthsBack) . '-' . $date;
+    $validator = new ReservationValidator($reservation);
+    $validator->validate();
+    $errors = $validator->getErrors();
 
+    if (empty($errors)) {
 
-    $query = "INSERT INTO reservations (weapon_id, lane, stance, date, time, user_id) VALUES ('$id', '$lane', '$stance', '$today', '$time', '$user_id')";
+        $db = new DatabaseInserter(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-    $result = $connection->query($query)
-    or die('Error: with query ' . $query . ' :(');
+        if ($db->addReservation($reservation)) {
+            header('Location: index.php');
+            exit();
+        } else {
+            $errors[] = 'Database error info: ' . $db->getConnection()->errorInfo()[0];
+        }
 
-    if ($result) {
-        header('Location: index.php');
-        exit();
-    } else {
-        $errors[] = 'Error: something has gone terribly wrong :(';
     }
 
 }

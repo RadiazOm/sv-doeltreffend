@@ -44,6 +44,22 @@
                     <span>Contact</span>
                 </span>
             </a>
+            <a href="reservations.php" class="navbar-item">
+                <span class="icon-text">
+                    <span class="icon">
+                        <i class="fa-solid fa-clipboard"></i>
+                    </span>
+                    <span>Afspraken</span>
+                </span>
+            </a>
+            <a href="forms.php" class="navbar-item">
+                <span class="icon-text">
+                    <span class="icon">
+                        <i class="fa-solid fa-inbox"></i>
+                    </span>
+                    <span>Formulieren</span>
+                </span>
+            </a>
         </div>
 
         <div class="navbar-end">
@@ -93,7 +109,7 @@
                                 <h2 class="title is-3"><?= $weapen->name; ?></h2>
                                 <p class="subtitle is-5"><?= $weapen->days; ?></p>
                             </div>
-                            <a href="detail.php?id=<?= $index; ?>" class="button is-primary">
+                            <a href="detail.php?id=<?= $weapen->id; ?>" class="button is-primary">
                                 Reserveren
                             </a>
                         </div>

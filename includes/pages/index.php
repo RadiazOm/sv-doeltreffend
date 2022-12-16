@@ -1,16 +1,11 @@
 <?php
+// If you read this have a nice day :)
 
-$query = "SELECT * FROM weapons";
+$db = new DatabaseSelector(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-$weaponsFromDB = $connection->query($query)
-    ->fetchAll(PDO::FETCH_CLASS, '\\Weapon');
-
-//Create new instance of MusicCollection & add albums
 $arsenal = new Arsenal();
-$arsenal->setWeapons($weaponsFromDB);
+$arsenal->setWeapons($db->getWeapons());
 
 //Get formatted albums objects & total
 $weapons = $arsenal->getWeapons();
 $totalWeapons = $arsenal->getTotalWeapons();
-
-

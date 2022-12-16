@@ -1,17 +1,28 @@
 <?php
 
-
 require_once 'settings.php';
-require_once 'classes/Database.php';
-require_once 'classes/Form.php';
-require_once 'classes/Forms.php';
-require_once 'classes/Weapon.php';
-require_once 'classes/Arsenal.php';
-require_once 'classes/Reservations.php';
-require_once 'classes/Reservation.php';
+require_once 'classes/Utils/Session.php';
+require_once 'classes/Users/User.php';
+require_once 'classes/Date/Date.php';
+require_once 'classes/interfaces/Validator.php';
+require_once 'classes/Reservation/ReservationValidator.php';
+require_once 'classes/Form/FormValidator.php';
+require_once 'classes/Database/Database.php';
+require_once 'classes/Database/DatabaseEraser.php';
+require_once 'classes/Database/DatabaseSelector.php';
+require_once 'classes/Database/DatabaseInserter.php';
+require_once 'classes/Form/Form.php';
+require_once 'classes/Form/Forms.php';
+require_once 'classes/Weapon/Weapon.php';
+require_once 'classes/Weapon/Arsenal.php';
+require_once 'classes/Reservation/Reservations.php';
+require_once 'classes/Reservation/Reservation.php';
 
 //Set variable for errors
 $errors = [];
+
+$session = new Session();
+
 
 try {
     $db = new Database(DB_HOST, DB_USER, DB_PASS, DB_NAME);

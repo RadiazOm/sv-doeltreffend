@@ -15,8 +15,14 @@ input[type="radio"] {
     /* Not removed via appearance */
 }
 
-input.is-active {
-    background-color: red !important;
+.login {
+    background-color: #3e8ed0;
+    height: 100%;
+}
+
+.small {
+    width: 35vw;
+    margin-inline: auto;
 }
 
 

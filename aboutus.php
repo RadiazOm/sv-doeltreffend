@@ -1,4 +1,3 @@
-<?php require_once 'includes/initialize.php'; ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,7 +8,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://kit.fontawesome.com/aa25eb13aa.js" crossorigin="anonymous"></script>
-    <script src="javascript/javascript.js"></script>
     <title>S.V Doeltreffend</title>
 </head>
 <body>
@@ -84,80 +82,16 @@
         </a>
     </div>
 </nav>
-<?php if (!empty($errors)): ?>
-    <section class="content">
-        <ul class="notification is-danger">
-            <?php foreach ($errors as $error): ?>
-                <li><?= $error; ?></li>
-            <?php endforeach; ?>
-        </ul>
-    </section>
-<?php endif; ?>
 
-<div class="is-flex is-justify-content-center">
-    <h1 class="title is-1">Afspraken</h1>
-</div>
-
-<form action="" method="get" class="is-flex is-justify-content-center m-6">
-    <div class="field has-addons has-addons-centered">
-        <p class="control">
-                <span class="select">
-                    <select name="filter">
-                        <option value="">Sorteer bij</option>
-                        <option value="date">Datum en tijd</option>
-                        <option value="user_id">Naam</option>
-                        <option value="weapon_id">Wapen</option>
-                    </select>
-                </span>
-        </p>
-        <div class="control">
-            <input class="input" type="text" placeholder="Vind een afspraak" name="query" value="<?= $_GET['query'] ?? '' ?>">
-        </div>
-        <div class="control">
-            <div class="control">
-                <input type="submit" value="Zoeken" class="button is-link">
-            </div>
+<div class="section">
+    <div class="container is-flex is-align-items-center is-flex-direction-column">
+        <h1 class="title is-1">Over Ons</h1>
+        <div class="box has-background-light">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores at aut eos exercitationem, fugiat hic illum libero obcaecati porro reiciendis rerum tempora vel voluptas. Ducimus facere fugit ipsa magni nulla quod veniam, voluptate voluptatibus. Architecto assumenda, autem enim error expedita facere illum impedit incidunt inventore libero neque, obcaecati, officia perspiciatis quia voluptate. Distinctio fugiat illo nostrum placeat praesentium recusandae, sint voluptates voluptatum. Aliquam culpa deleniti dignissimos doloremque enim hic minus nostrum officiis quaerat repellendus? Ad eius iste maiores nihil quas repellat voluptatum? A aspernatur consequuntur debitis delectus distinctio doloribus esse, fugiat iure libero mollitia nam odit repudiandae sint sit voluptates!
+            </p>
         </div>
     </div>
-</form>
-
-<div class="container is-flex is-justify-content-center">
-    <table class="table is-striped">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Wapen</th>
-            <th>Houding</th>
-            <th>Datum</th>
-            <th>Tijd</th>
-            <th>Naam</th>
-            <th>Baan</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tfoot>
-        <tr>
-            <td colspan="8" class="has-text-centered">Total: <?= $totalReservations ?></td>
-        </tr>
-        </tfoot>
-        <tbody>
-        <?php /** @var Reservation $reservations */
-        foreach ($reservations as $reservation) { ?>
-            <tr>
-                <td><?= $reservation->id ?></td>
-                <td><?= $reservation->weapon->name ?></td>
-                <td><?= $reservation->stance ?></td>
-                <td><?= $reservation->date ?></td>
-                <td><?= $reservation->time ?></td>
-                <td><?= $reservation->user->first_name ?></td>
-                <td><?= $reservation->lane ?></td>
-                <td><a href="reservation_detail.php?id=<?= $reservation->id ?>">Details</a></td>
-                <td><a href="reservation_edit.php?id=<?= $reservation->id ?>">Edit</a></td>
-            </tr>
-        <?php } ?>
-        </tbody>
-    </table>
 </div>
 <footer class="footer has-background-dark">
     <div class="content has-text-centered has-text-white">
@@ -171,4 +105,3 @@
 </footer>
 </body>
 </html>
-

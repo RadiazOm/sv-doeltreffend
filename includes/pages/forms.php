@@ -1,15 +1,35 @@
 <?php
 
-$query = "SELECT * FROM forms ORDER BY date, time";
-
-$formsFromDB = $connection->query($query)
-    ->fetchAll(PDO::FETCH_CLASS, '\\Form');
+$db = new DatabaseSelector(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 $formClass = new Forms();
-$formClass->setForms($formsFromDB);
+$formClass->setForms($db->getForms());
 
 //Get variables for template
 $forms = $formClass->getForms();
-
 $totalForms = $formClass->getTotalForms();
 
+
+if (isset($_GET['query'])) {
+    if (isset($_GET['filter'])) {
+        switch ($_GET['filter']) {
+            case 'subject':
+            case 'user_id':
+            case 'date':
+            case '':
+                break;
+            default:
+                $errors[] = 'Invalid filter parameter';
+                break;
+        }
+        if (empty($errors)) {
+            $formClass->setForms($db->getFormsByQuestion($_GET['query'], $_GET['filter']));
+
+            $forms = $formClass->getForms();
+            $totalForms = $formClass->getTotalForms();
+            if ($totalForms <= 0) {
+                $errors[] = 'No forms found';
+            }
+        }
+    }
+}

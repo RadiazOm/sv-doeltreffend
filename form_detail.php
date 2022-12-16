@@ -45,6 +45,22 @@
                     <span>Contact</span>
                 </span>
         </a>
+        <a href="reservations.php" class="navbar-item">
+                <span class="icon-text">
+                    <span class="icon">
+                        <i class="fa-solid fa-clipboard"></i>
+                    </span>
+                    <span>Afspraken</span>
+                </span>
+        </a>
+        <a href="forms.php" class="navbar-item">
+                <span class="icon-text">
+                    <span class="icon">
+                        <i class="fa-solid fa-inbox"></i>
+                    </span>
+                    <span>Formulieren</span>
+                </span>
+        </a>
     </div>
 
     <div class="navbar-end">

@@ -45,6 +45,22 @@
                     <span>Contact</span>
                 </span>
         </a>
+        <a href="reservations.php" class="navbar-item">
+                <span class="icon-text">
+                    <span class="icon">
+                        <i class="fa-solid fa-clipboard"></i>
+                    </span>
+                    <span>Afspraken</span>
+                </span>
+        </a>
+        <a href="forms.php" class="navbar-item">
+                <span class="icon-text">
+                    <span class="icon">
+                        <i class="fa-solid fa-inbox"></i>
+                    </span>
+                    <span>Formulieren</span>
+                </span>
+        </a>
     </div>
 
     <div class="navbar-end">
@@ -90,7 +106,7 @@
                 <?php if (isset($weapon)): ?>
                     <h1 class="title is-1"><?= $weapon->name ?></h1>
                 <?php endif; ?>
-                <form action="detail.php?id=<?= $id ?>&date=<?= $date ?>&month=<?= $monthsBack ?>" class="field" method="post">
+                <form action="detail.php?id=<?= $weapon->id ?>&date=<?= $date ?>&month=<?= $monthsBack ?>" class="field" method="post">
                     <div class="field m-6">
                         <label for="lane"></label>
                         <div class="control">
@@ -130,8 +146,7 @@
                     <div class="field m-6">
                         <div class="control">
                             <label for="time">
-                                <input type="time" id="time" name="time" class="input"
-                                       min="09:00" max="18:00" required>
+                                <input type="time" id="time" name="time" class="input">
                             </label>
                         </div>
                     </div>
@@ -150,9 +165,9 @@
         <div class="columns">
             <div class="column">
                 <div class="is-flex is-justify-content-space-around">
-                    <a href="detail.php?id=<?= $id ?>&date=<?= $date ?>&month=<?= $monthsBack + 1?>"><i class="fa-solid fa-arrow-left"></i></a>
+                    <a href="detail.php?id=<?= $weapon->id ?>&date=<?= $date ?>&month=<?= $monthsBack + 1?>"><i class="fa-solid fa-arrow-left"></i></a>
                     <h1 class="title is-1"><?= $month ?></h1>
-                    <a href="detail.php?id=<?= $id ?>&date=<?= $date ?>&month=<?= $monthsBack - 1?>"><i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="detail.php?id=<?= $weapon->id ?>&date=<?= $date ?>&month=<?= $monthsBack - 1?>"><i class="fa-solid fa-arrow-right"></i></a>
                 </div>
                     <table class="table is-fullwidth">
                     <thead>
@@ -173,7 +188,7 @@
                         </tr>
                         <tr>
                             <?php endif; ?>
-                            <td><?php if($i > $day - 1 && $i <= $monthLength + $day - 1): ?><a class="button is-outlined is-info" href="detail.php?id=<?= $id ?>&date=<?php echo $i - $day + 1;?>&month=<?= $monthsBack ?>"><?php echo  $i - $day + 1; ?></a> <?php endif; ?></td>
+                            <td><?php if($i > $day - 1 && $i <= $monthLength + $day - 1): ?><a class="button is-outlined is-info" href="detail.php?id=<?= $weapon->id ?>&date=<?php echo $i - $day + 1;?>&month=<?= $monthsBack ?>"><?php echo  $i - $day + 1; ?></a> <?php endif; ?></td>
                     <?php endfor; ?>
                         </tr>
                     </tbody>

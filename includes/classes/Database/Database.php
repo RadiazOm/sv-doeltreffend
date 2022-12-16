@@ -8,7 +8,7 @@ class Database
     /**
      * @var \PDO
      */
-    private \PDO $connection;
+    protected \PDO $connection;
 
     /**
      * Database constructor.
