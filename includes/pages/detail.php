@@ -18,16 +18,21 @@ if (isset($_GET['date'])) {
 
 $monthLength = date('t', time() - 2628000 * $monthsBack);
 $month = date('F', time() - 2628000 * $monthsBack);
-$day = Date::getWeekday($monthsBack, $date);
+$year = date('o', time() - 2628000 * $monthsBack);
+$day = date('N', strtotime(date('F', time() - 2628000 * $monthsBack) . ' 01, ' . date('o', time() - 2628000 * $monthsBack)));
 // end making calendar
+
+
 
 if (isset($_POST['submit'])) {
     $reservation = new Reservation();
-    $reservation->weapon_id = $weapon->id;
+    $reservation->weapon = $weapon;
     $reservation->stance = $_POST['stance'];
     $reservation->time = $_POST['time'];
     $reservation->lane = $_POST['lane'];
-    $reservation->user_id = '1';
+    $user = new User();
+    $user->id = '1';
+    $reservation->user = $user;
     $reservation->date = date('y', time() - 2628000 * $monthsBack) . '-' . date('n', time() - 2628000 * $monthsBack) . '-' . $date;
 
     $validator = new ReservationValidator($reservation);

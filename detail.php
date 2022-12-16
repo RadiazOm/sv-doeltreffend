@@ -164,9 +164,9 @@
 
         <div class="columns">
             <div class="column">
-                <div class="is-flex is-justify-content-space-around">
+                <div class="is-flex is-justify-content-space-between">
                     <a href="detail.php?id=<?= $weapon->id ?>&date=<?= $date ?>&month=<?= $monthsBack + 1?>"><i class="fa-solid fa-arrow-left"></i></a>
-                    <h1 class="title is-1"><?= $month ?></h1>
+                    <h1 class="title is-1"><?= $month ?> <?= $year ?></h1>
                     <a href="detail.php?id=<?= $weapon->id ?>&date=<?= $date ?>&month=<?= $monthsBack - 1?>"><i class="fa-solid fa-arrow-right"></i></a>
                 </div>
                     <table class="table is-fullwidth">
@@ -188,7 +188,7 @@
                         </tr>
                         <tr>
                             <?php endif; ?>
-                            <td><?php if($i > $day - 1 && $i <= $monthLength + $day - 1): ?><a class="button is-outlined is-info" href="detail.php?id=<?= $weapon->id ?>&date=<?php echo $i - $day + 1;?>&month=<?= $monthsBack ?>"><?php echo  $i - $day + 1; ?></a> <?php endif; ?></td>
+                            <td><?php if($i > $day - 1 && $i <= $monthLength + $day - 1): ?><a class="button is-info <?= $date == $i - $day + 1 ? '' : 'is-outlined'?>" href="detail.php?id=<?= $weapon->id ?>&date=<?php echo $i - $day + 1;?>&month=<?= $monthsBack ?>"><?php echo  $i - $day + 1; ?></a> <?php endif; ?></td>
                     <?php endfor; ?>
                         </tr>
                     </tbody>

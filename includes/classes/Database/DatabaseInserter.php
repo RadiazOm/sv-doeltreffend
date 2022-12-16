@@ -40,12 +40,12 @@ class DatabaseInserter extends Database
         $statement = $this->connection->prepare($query);
 
         return $statement->execute([
-            ':weapon_id' => $reservation->weapon_id,
+            ':weapon_id' => $reservation->weapon->id,
             ':lane' => $reservation->lane,
             ':stance' => $reservation->stance,
             ':date' => $reservation->date,
             ':time' => $reservation->time,
-            ':user_id' => $reservation->user_id
+            ':user_id' => $reservation->user->id
         ]);
     }
 

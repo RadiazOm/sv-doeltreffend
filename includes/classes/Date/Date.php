@@ -11,7 +11,9 @@ class Date
     {
         $day = date('N', time() - 2628000 * $monthsBack);
 
+
         $day -= ($date % 7) - 1;
+
 
         if ($day < 0) {
             $day = 7 + $day;
