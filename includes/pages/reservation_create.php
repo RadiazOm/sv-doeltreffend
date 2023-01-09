@@ -1,4 +1,9 @@
 <?php
+/** @var Session $session */
+if (!$session->keyExists('user')) {
+    header('Location: login.php');
+    exit;
+}
 
 $db = new DatabaseSelector(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
@@ -25,13 +30,14 @@ $day = date('N', strtotime(date('F', time() - 2628000 * $monthsBack) . ' 01, ' .
 
 
 if (isset($_POST['submit'])) {
+
+    $formData = new Data($_POST);
     $reservation = new Reservation();
     $reservation->weapon = $weapon;
-    $reservation->stance = $_POST['stance'];
+    $reservation->stance = $_POST['stance'] ?? '';
     $reservation->time = $_POST['time'];
     $reservation->lane = $_POST['lane'];
-    $user = new User();
-    $user->id = '1';
+    $user = $session->get('user');
     $reservation->user = $user;
     $reservation->date = date('y', time() - 2628000 * $monthsBack) . '-' . date('n', time() - 2628000 * $monthsBack) . '-' . $date;
 

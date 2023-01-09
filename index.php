@@ -44,6 +44,7 @@
                     <span>Contact</span>
                 </span>
             </a>
+            <?php if ($session->get('user')->admin == 1): ?>
             <a href="reservations.php" class="navbar-item">
                 <span class="icon-text">
                     <span class="icon">
@@ -60,6 +61,7 @@
                     <span>Formulieren</span>
                 </span>
             </a>
+            <?php endif; ?>
         </div>
 
         <div class="navbar-end">
@@ -99,7 +101,7 @@
             <div class="card m-3">
                 <div class="card-image">
                     <figure class="image is-4by3">
-                        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Picture of weapon">
+                        <img src="img/<?= strtolower($weapen->name) ?>.jpg" alt="Picture of weapon" class="cover">
                     </figure>
                 </div>
                 <div class="card-content">
@@ -109,7 +111,7 @@
                                 <h2 class="title is-3"><?= $weapen->name; ?></h2>
                                 <p class="subtitle is-5"><?= $weapen->days; ?></p>
                             </div>
-                            <a href="detail.php?id=<?= $weapen->id; ?>" class="button is-primary">
+                            <a href="reservation_create.php?id=<?= $weapen->id; ?>" class="button is-primary">
                                 Reserveren
                             </a>
                         </div>

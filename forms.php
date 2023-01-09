@@ -45,22 +45,24 @@
                     <span>Contact</span>
                 </span>
             </a>
-            <a href="reservations.php" class="navbar-item">
+            <?php if ($session->get('user')->admin == 1): ?>
+                <a href="reservations.php" class="navbar-item">
                 <span class="icon-text">
                     <span class="icon">
                         <i class="fa-solid fa-clipboard"></i>
                     </span>
                     <span>Afspraken</span>
                 </span>
-            </a>
-            <a href="forms.php" class="navbar-item">
+                </a>
+                <a href="forms.php" class="navbar-item">
                 <span class="icon-text">
                     <span class="icon">
                         <i class="fa-solid fa-inbox"></i>
                     </span>
                     <span>Formulieren</span>
                 </span>
-            </a>
+                </a>
+            <?php endif; ?>
         </div>
 
         <div class="navbar-end">
@@ -124,7 +126,6 @@
         <table class="table is-striped">
             <thead>
             <tr>
-                <th>#</th>
                 <th>User</th>
                 <th>Date</th>
                 <th>Subject</th>
@@ -135,14 +136,13 @@
             </thead>
             <tfoot>
             <tr>
-                <td colspan="7" class="has-text-centered">Total: <?= $totalForms ?></td>
+                <td colspan="6" class="has-text-centered">Total: <?= $totalForms ?></td>
             </tr>
             </tfoot>
             <tbody>
             <?php foreach ($forms as $index => $form) { ?>
                 <tr>
-                    <td><?= $form->id ?></td>
-                    <td><?= $form->user_id ?></td>
+                    <td><?= $form->user->first_name ?></td>
                     <td><?= $form->date ?></td>
                     <td><?= $form->subject ?></td>
                     <td><?= mb_strlen($form->question, 'utf8') > 15 ? substr($form->question, 0, 15) . '...' : $form->question; ?></td>
@@ -153,6 +153,7 @@
             </tbody>
         </table>
     </div>
+    <div class="footermargin"></div>
     <footer class="footer has-background-dark">
         <div class="content has-text-centered has-text-white">
             <p>

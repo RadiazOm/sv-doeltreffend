@@ -96,70 +96,16 @@
     </section>
 <?php endif; ?>
 
-<div class="is-flex is-justify-content-center">
-    <h1 class="title is-1">Afspraken</h1>
-</div>
-
-<form action="" method="get" class="is-flex is-justify-content-center m-6">
-    <div class="field has-addons has-addons-centered">
-        <p class="control">
-                <span class="select">
-                    <select name="filter">
-                        <option value="">Sorteer bij</option>
-                        <option value="date">Datum en tijd</option>
-                        <option value="user_id">Naam</option>
-                        <option value="weapon_id">Wapen</option>
-                    </select>
-                </span>
-        </p>
-        <div class="control">
-            <input class="input" type="text" placeholder="Vind een afspraak" name="query" value="<?= $_GET['query'] ?? '' ?>">
-        </div>
-        <div class="control">
-            <div class="control">
-                <input type="submit" value="Zoeken" class="button is-link">
-            </div>
-        </div>
+<div class="container is-flex is-justify-content-center is-flex-direction-column is-align-items-center">
+    <h1 class="title is-1"><?= $reservation->weapon->name?></h1>
+    <h2 class="subtitle is-2"><?= $reservation->user->first_name?></h2>
+    <a class="button is-primary" href="reservations.php">Terug naar de lijst</a>
+    <div class="box m-6">
+        <p>Tijd: <?= $reservation->time?></p>
+        <p>Datum: <?= $reservation->date?></p>
+        <p>Baan: <?= $reservation->lane?></p>
     </div>
-</form>
-
-<div class="container is-flex is-justify-content-center">
-    <table class="table is-striped">
-        <thead>
-        <tr>
-            <th>Wapen</th>
-            <th>Houding</th>
-            <th>Datum</th>
-            <th>Tijd</th>
-            <th>Naam</th>
-            <th>Baan</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tfoot>
-        <tr>
-            <td colspan="7" class="has-text-centered">Total: <?= $totalReservations ?></td>
-        </tr>
-        </tfoot>
-        <tbody>
-        <?php /** @var Reservation $reservations */
-        foreach ($reservations as $reservation) { ?>
-            <tr>
-                <td><?= $reservation->weapon->name ?></td>
-                <td><?= $reservation->stance ?></td>
-                <td><?= $reservation->date ?></td>
-                <td><?= $reservation->time ?></td>
-                <td><?= $reservation->user->first_name ?></td>
-                <td><?= $reservation->lane ?></td>
-                <td><a href="reservation_detail.php?id=<?= $reservation->id ?>">Details</a></td>
-                <td><a href="reservation_edit.php?id=<?= $reservation->id ?>">Edit</a></td>
-            </tr>
-        <?php } ?>
-        </tbody>
-    </table>
 </div>
-<div class="footermargin"></div>
 <footer class="footer has-background-dark">
     <div class="content has-text-centered has-text-white">
         <p>
@@ -172,4 +118,3 @@
 </footer>
 </body>
 </html>
-

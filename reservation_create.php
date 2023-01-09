@@ -45,22 +45,24 @@
                     <span>Contact</span>
                 </span>
         </a>
-        <a href="reservations.php" class="navbar-item">
+        <?php if ($session->get('user')->admin == 1): ?>
+            <a href="reservations.php" class="navbar-item">
                 <span class="icon-text">
                     <span class="icon">
                         <i class="fa-solid fa-clipboard"></i>
                     </span>
                     <span>Afspraken</span>
                 </span>
-        </a>
-        <a href="forms.php" class="navbar-item">
+            </a>
+            <a href="forms.php" class="navbar-item">
                 <span class="icon-text">
                     <span class="icon">
                         <i class="fa-solid fa-inbox"></i>
                     </span>
                     <span>Formulieren</span>
                 </span>
-        </a>
+            </a>
+        <?php endif; ?>
     </div>
 
     <div class="navbar-end">
@@ -98,15 +100,44 @@
     <div class="container">
         <div class="columns">
             <div class="column">
-                <figure>
-                    <img src="" alt="picture that i dont have">
-                </figure>
+                <div class="column">
+                    <div class="is-flex is-justify-content-space-between">
+                        <a href="reservation_create.php?id=<?= $weapon->id ?>&date=<?= $date ?>&month=<?= $monthsBack + 1?>"><i class="fa-solid fa-arrow-left"></i></a>
+                        <h1 class="title is-1"><?= $month ?> <?= $year ?></h1>
+                        <a href="reservation_create.php?id=<?= $weapon->id ?>&date=<?= $date ?>&month=<?= $monthsBack - 1?>"><i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <table class="table is-fullwidth">
+                        <thead>
+                        <tr>
+                            <td>Zo</td>
+                            <td>Ma</td>
+                            <td>Di</td>
+                            <td>Wo</td>
+                            <td>Do</td>
+                            <td>Vr</td>
+                            <td>Za</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <?php for ($i = 0; $i < 42; $i++): ?>
+                            <?php if ($i % 7 === 0): ?>
+                        </tr>
+                        <tr>
+                            <?php endif; ?>
+                            <td><?php if($i > $day - 1 && $i <= $monthLength + $day - 1): ?><a class="button is-info <?= $date == $i - $day + 1 ? '' : 'is-outlined'?>" href="reservation_create.php?id=<?= $weapon->id ?>&date=<?php echo $i - $day + 1;?>&month=<?= $monthsBack ?>"><?php echo  $i - $day + 1; ?></a> <?php endif; ?></td>
+                            <?php endfor; ?>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!-- todo make calender thingy -->
+                </div>
             </div>
             <div class="column has-text-centered">
                 <?php if (isset($weapon)): ?>
                     <h1 class="title is-1"><?= $weapon->name ?></h1>
                 <?php endif; ?>
-                <form action="detail.php?id=<?= $weapon->id ?>&date=<?= $date ?>&month=<?= $monthsBack ?>" class="field" method="post">
+                <form action="reservation_create.php?id=<?= $weapon->id ?>&date=<?= $date ?>&month=<?= $monthsBack ?>" class="field" method="post">
                     <div class="field m-6">
                         <label for="lane"></label>
                         <div class="control">
@@ -129,16 +160,16 @@
 
                     <div class="field m-6">
                         <div class="control" id="radiobuttons">
-                            <label for="rad1" class="button">
-                                <input id="rad1" type="radio" name="stance" value="standing">
+                            <label for="rad1" class="button <?= isset($reservation->stance) && $reservation->stance == 'standing' ? 'is-link' : '' ?>">
+                                <input id="rad1" type="radio" name="stance" value="standing" <?= isset($reservation->stance) && $reservation->stance == 'standing' ? 'checked' : '' ?>>
                                 Staand
                             </label>
-                            <label for="rad2" class="button">
-                                <input id="rad2" type="radio" name="stance" value="kneeling">
+                            <label for="rad2" class="button <?= isset($reservation->stance) && $reservation->stance == 'kneeling' ? 'is-link' : '' ?>">
+                                <input id="rad2" type="radio" name="stance" value="kneeling" <?= isset($reservation->stance) && $reservation->stance == 'kneeling' ? 'checked' : '' ?>>
                                 Knielend
                             </label>
-                            <label for="rad3" class="button">
-                                <input id="rad3" type="radio" name="stance" value="laying">
+                            <label for="rad3" class="button <?= isset($reservation->stance) && $reservation->stance == 'laying' ? 'is-link' : '' ?>">
+                                <input id="rad3" type="radio" name="stance" value="laying" <?= isset($reservation->stance) && $reservation->stance == 'laying' ? 'checked' : '' ?>>
                                 Liggend
                             </label>
                         </div>
@@ -146,7 +177,7 @@
                     <div class="field m-6">
                         <div class="control">
                             <label for="time">
-                                <input type="time" id="time" name="time" class="input">
+                                <input type="time" id="time" name="time" class="input" value="<?= $reservation->time ?? '' ?>">
                             </label>
                         </div>
                     </div>
@@ -162,45 +193,11 @@
 
 
 
-        <div class="columns">
-            <div class="column">
-                <div class="is-flex is-justify-content-space-between">
-                    <a href="detail.php?id=<?= $weapon->id ?>&date=<?= $date ?>&month=<?= $monthsBack + 1?>"><i class="fa-solid fa-arrow-left"></i></a>
-                    <h1 class="title is-1"><?= $month ?> <?= $year ?></h1>
-                    <a href="detail.php?id=<?= $weapon->id ?>&date=<?= $date ?>&month=<?= $monthsBack - 1?>"><i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-                    <table class="table is-fullwidth">
-                    <thead>
-                        <tr>
-                            <td>Zo</td>
-                            <td>Ma</td>
-                            <td>Di</td>
-                            <td>Wo</td>
-                            <td>Do</td>
-                            <td>Vr</td>
-                            <td>Za</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                    <?php for ($i = 0; $i < 42; $i++): ?>
-                    <?php if ($i % 7 === 0): ?>
-                        </tr>
-                        <tr>
-                            <?php endif; ?>
-                            <td><?php if($i > $day - 1 && $i <= $monthLength + $day - 1): ?><a class="button is-info <?= $date == $i - $day + 1 ? '' : 'is-outlined'?>" href="detail.php?id=<?= $weapon->id ?>&date=<?php echo $i - $day + 1;?>&month=<?= $monthsBack ?>"><?php echo  $i - $day + 1; ?></a> <?php endif; ?></td>
-                    <?php endfor; ?>
-                        </tr>
-                    </tbody>
-                </table>
-                <!-- todo make calender thingy -->
-            </div>
-            <div class="column">
 
-                <!-- todo make time selection thingy -->
-            </div>
-        </div>
     </div>
+</div>
+<div class="footermargin">
+    <!--just a margin for the footer-->
 </div>
 <footer class="footer has-background-dark">
     <div class="content has-text-centered has-text-white">

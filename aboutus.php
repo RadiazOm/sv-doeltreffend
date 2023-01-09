@@ -1,3 +1,4 @@
+<?php require_once 'includes/initialize.php'; ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -43,22 +44,24 @@
                     <span>Contact</span>
                 </span>
         </a>
-        <a href="reservations.php" class="navbar-item">
+        <?php if ($session->get('user')->admin == 1): ?>
+            <a href="reservations.php" class="navbar-item">
                 <span class="icon-text">
                     <span class="icon">
                         <i class="fa-solid fa-clipboard"></i>
                     </span>
                     <span>Afspraken</span>
                 </span>
-        </a>
-        <a href="forms.php" class="navbar-item">
+            </a>
+            <a href="forms.php" class="navbar-item">
                 <span class="icon-text">
                     <span class="icon">
                         <i class="fa-solid fa-inbox"></i>
                     </span>
                     <span>Formulieren</span>
                 </span>
-        </a>
+            </a>
+        <?php endif; ?>
     </div>
 
     <div class="navbar-end">
@@ -93,6 +96,7 @@
         </div>
     </div>
 </div>
+<div class="footermarginbig"></div>
 <footer class="footer has-background-dark">
     <div class="content has-text-centered has-text-white">
         <p>

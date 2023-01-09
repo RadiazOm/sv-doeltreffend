@@ -1,4 +1,9 @@
 <?php
+/** @var Session $session */
+if (!$session->keyExists('user') || $session->get('user')->admin != 1) {
+    header('Location: login.php');
+    exit;
+}
 
 require_once dirname(__FILE__) . '/form_detail.php';
 

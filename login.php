@@ -21,37 +21,37 @@
         <div class="container">
             <div class="box is-rounded has-background-light is-flex is-align-items-center is-flex-direction-column small">
                 <h2 class="subtitle is-3">Inloggen</h2>
+                <?php if (!empty($errors)): ?>
+                    <section class="content">
+                        <ul class="notification is-danger">
+                            <?php foreach ($errors as $error): ?>
+                                <li><?= $error; ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </section>
+                <?php endif; ?>
                 <form action="" method="post">
                     <div class="field m-6">
-                        <label class="label" for="name">Naam</label>
-                        <div class="control has-icons-left has-icons-right">
-                            <input class="input is-info" type="text" placeholder="Naam" value="" id="name">
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-user"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="field m-6">
                         <label class="label" for="knsa">KNSA-Nummer</label>
-                        <div class="control has-icons-left has-icons-right">
-                            <input class="input is-info" type="text" placeholder="KNSA-Nummer" value="" id="knsa">
+                        <div class="control has-icons-left">
+                            <input class="input is-info" type="number" placeholder="KNSA-Nummer" value="<?= $knsa ?? '' ?>" id="knsa" name="knsa">
                             <span class="icon is-small is-left">
                                 <i class="fas fa-hashtag"></i>
                             </span>
                         </div>
                     </div>
                     <div class="field m-6">
-                        <label class="label" for="email">E-mail</label>
-                        <div class="control has-icons-left has-icons-right">
-                            <input class="input is-info" type="text" placeholder="E-mail" value="" id="email">
+                        <label class="label" for="password">Wachtwoord</label>
+                        <div class="control has-icons-left">
+                            <input class="input is-info" type="password" placeholder="Wachtwoord" value="" id="password" name="password">
                             <span class="icon is-small is-left">
-                                <i class="fas fa-envelope"></i>
+                                <i class="fas fa-lock"></i>
                             </span>
                         </div>
                     </div>
                     <div class="field m-6 is-flex is-justify-content-center">
                         <div class="control">
-                            <input type="submit" name="submit" value="Sturen" class="button is-link">
+                            <input type="submit" name="submit" value="Login" class="button is-link">
                         </div>
                     </div>
                 </form>

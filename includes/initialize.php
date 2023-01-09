@@ -2,11 +2,15 @@
 
 require_once 'settings.php';
 require_once 'classes/Utils/Session.php';
+require_once 'classes/Utils/Data.php';
 require_once 'classes/Users/User.php';
 require_once 'classes/Date/Date.php';
 require_once 'classes/interfaces/Validator.php';
 require_once 'classes/Reservation/ReservationValidator.php';
 require_once 'classes/Form/FormValidator.php';
+require_once 'classes/Users/LoginValidator.php';
+require_once 'classes/Users/RegisterValidator.php';
+require_once 'classes/Users/UserValidator.php';
 require_once 'classes/Database/Database.php';
 require_once 'classes/Database/DatabaseEraser.php';
 require_once 'classes/Database/DatabaseSelector.php';

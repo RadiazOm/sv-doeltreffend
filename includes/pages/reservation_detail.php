@@ -7,4 +7,4 @@ if (!$session->keyExists('user') || $session->get('user')->admin != 1) {
 
 $db = new DatabaseSelector(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-$form = $db->getFormById($_GET['id']);
+$reservation = $db->getReservationById($_GET['id']);

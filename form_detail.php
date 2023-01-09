@@ -45,22 +45,24 @@
                     <span>Contact</span>
                 </span>
         </a>
-        <a href="reservations.php" class="navbar-item">
+        <?php if ($session->get('user')->admin == 1): ?>
+            <a href="reservations.php" class="navbar-item">
                 <span class="icon-text">
                     <span class="icon">
                         <i class="fa-solid fa-clipboard"></i>
                     </span>
                     <span>Afspraken</span>
                 </span>
-        </a>
-        <a href="forms.php" class="navbar-item">
+            </a>
+            <a href="forms.php" class="navbar-item">
                 <span class="icon-text">
                     <span class="icon">
                         <i class="fa-solid fa-inbox"></i>
                     </span>
                     <span>Formulieren</span>
                 </span>
-        </a>
+            </a>
+        <?php endif; ?>
     </div>
 
     <div class="navbar-end">
@@ -97,7 +99,7 @@
 <div class="container is-flex is-justify-content-center is-flex-direction-column is-align-items-center">
     <a class="button is-primary" href="forms.php">Terug naar de lijst</a>
     <h1 class="title is-1"><?= $form->subject?></h1>
-    <h2 class="subtitle is-2"><?= $form->user_id?></h2>
+    <h2 class="subtitle is-2"><?= $form->user->first_name?></h2>
     <div class="box">
         <p><?= $form->question?></p>
     </div>

@@ -14,8 +14,24 @@ class DatabaseSelector extends Database
      */
     public function getForms(): array
     {
-        return $this->connection->query('SELECT forms.*, users.first_name AS user_name FROM forms
-                                                  LEFT JOIN users ON users.id = forms.user_id')->fetchAll(\PDO::FETCH_CLASS, '\\Form');
+        $statement = $this->connection->query('SELECT forms.*, users.first_name AS user_name FROM forms
+                                                  LEFT JOIN users ON users.id = forms.user_id');
+
+        $forms = [];
+        while (($row = $statement->fetch(PDO::FETCH_ASSOC)) !== false) {
+            $form = new Form();
+            $form->id       = $row['id'];
+            $form->subject  = $row['subject'];
+            $form->date    = $row['date'];
+            $form->time      = $row['time'];
+            $form->question   = $row['question'];
+            $user           = new User();
+            $user->id       = $row['user_id'];
+            $user->first_name = $row['user_name'];
+            $form->user     = $user;
+            $forms[] = $form;
+        }
+        return $forms;
     }
 
     /**
@@ -25,15 +41,33 @@ class DatabaseSelector extends Database
     public function getFormsByQuestion(string $query, string $filter = null): array
     {
         if (isset($filter) && $filter != '') {
-            $statement = $this->connection->prepare("SELECT * FROM forms WHERE question LIKE :query ORDER BY $filter");
+            $statement = $this->connection->prepare("SELECT * FROM forms SELECT forms.*, users.first_name as user_name FROM forms 
+                                                        LEFT JOIN users ON users.id = forms.user_id
+                                                        WHERE question LIKE :query ORDER BY $filter");
         } else {
-            $statement = $this->connection->prepare("SELECT * FROM forms WHERE question LIKE :query");
+            $statement = $this->connection->prepare("SELECT forms.*, users.first_name as user_name FROM forms 
+                                                        LEFT JOIN users ON users.id = forms.user_id
+                                                        WHERE question LIKE :query");
         }
         $statement->execute([
             ':query' => '%' . $query . '%'
         ]);
 
-        return $statement->fetchAll(\PDO::FETCH_CLASS, '\\Form');
+        $forms = [];
+        while (($row = $statement->fetch(PDO::FETCH_ASSOC)) !== false) {
+            $form = new Form();
+            $form->id       = $row['id'];
+            $form->subject  = $row['subject'];
+            $form->date    = $row['date'];
+            $form->time      = $row['time'];
+            $form->question   = $row['question'];
+            $user           = new User();
+            $user->id       = $row['user_id'];
+            $user->first_name = $row['user_name'];
+            $form->user     = $user;
+            $forms[] = $form;
+        }
+        return $forms;
     }
 
     /**
@@ -41,17 +75,27 @@ class DatabaseSelector extends Database
      *
      * @param int $id
      * @return Form
-     * @throws \Exception
+     * @throws Exception
      */
     public function getFormById(int $id): Form
     {
-        $statement = $this->connection->prepare('SELECT * FROM forms WHERE id = :id');
+        $statement = $this->connection->prepare('SELECT forms.*, users.first_name as user_name FROM forms 
+                                                       LEFT JOIN users ON users.id = forms.user_id
+                                                       WHERE forms.id = :id');
         $statement->execute([':id' => $id]);
 
-        if (($form = $statement->fetchObject('\\Form')) === false) {
-            throw new \Exception('ID is not available in the database');
+        $form = new Form();
+        while (($row = $statement->fetch(PDO::FETCH_ASSOC)) !== false) {
+            $form->id       = $row['id'];
+            $form->subject  = $row['subject'];
+            $form->date    = $row['date'];
+            $form->time      = $row['time'];
+            $form->question   = $row['question'];
+            $user           = new User();
+            $user->id       = $row['user_id'];
+            $user->first_name = $row['user_name'];
+            $form->user     = $user;
         }
-
         return $form;
     }
 

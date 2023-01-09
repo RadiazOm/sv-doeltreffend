@@ -85,90 +85,81 @@
         </a>
     </div>
 </nav>
-<?php if (!empty($errors)): ?>
-    <section class="content">
-        <ul class="notification is-danger">
-            <?php foreach ($errors as $error): ?>
-                <li><?= $error; ?></li>
-            <?php endforeach; ?>
-        </ul>
-    </section>
-<?php endif; ?>
-<div class="is-flex is-flex-direction-column is-align-items-center">
-    <h1 class="title is-1">
-        Edit
-    </h1>
-    <a class="button is-primary" href="reservations.php">Terug naar de lijst</a>
-</div>
 <div class="section">
     <div class="container">
         <div class="box is-rounded has-background-light is-flex is-align-items-center is-flex-direction-column small">
-            <h2 class="subtitle is-3">Edit</h2>
+            <h2 class="subtitle is-3">Account aanpassen</h2>
+            <?php if (!empty($errors)): ?>
+                <section class="content">
+                    <ul class="notification is-danger">
+                        <?php foreach ($errors as $error): ?>
+                            <li><?= $error; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </section>
+            <?php endif; ?>
+            <div>
+                <a href="login.php" class="button is-info">Terug naar profiel</a>
+            </div>
             <form action="" method="post">
                 <div class="field m-6">
-                    <label for="weapon"></label>
-                    <div class="control">
-                        <div class="select">
-                            <select name="weapon-id" id="weapon">
-                                <?php foreach ($weapons as $weapon):?>
-                                <option value="<?= $weapon->id ?>" <?= $reservation->weapon->id == $weapon->id ? 'selected="selected"' : ''?> ><?= $weapon->name ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="field m-6">
-                    <label for="weapon"></label>
-                    <div class="control">
-                        <div class="select">
-                            <select name="stance" id="stance">
-                                <option value="standing" <?= $reservation->stance == 'standing' ? 'selected="selected"' : ''?> >Staand</option>
-                                <option value="kneeling" <?= $reservation->stance == 'kneeling' ? 'selected="selected"' : ''?> >Knielend</option>
-                                <option value="laying" <?= $reservation->stance == 'laying' ? 'selected="selected"' : ''?> >Liggend</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="field m-6">
-                    <label class="label" for="date">Datum</label>
+                    <label class="label" for="first-name">Voornaam</label>
                     <div class="control has-icons-left">
-                        <input class="input" type="date" placeholder="Datum" value="<?= $reservation->date ?? '' ?>" id="date" name="date">
+                        <input class="input is-info" type="text" placeholder="Voornaam" value="<?= $user->first_name ?? '' ?>" id="first-name" name="first-name">
                         <span class="icon is-small is-left">
-                                <i class="fas fa-calendar"></i>
+                                <i class="fas fa-person"></i>
                             </span>
                     </div>
                 </div>
                 <div class="field m-6">
-                    <label class="label" for="time">Tijd</label>
+                    <label class="label" for="last-name">Achternaam</label>
                     <div class="control has-icons-left">
-                        <input class="input" type="time" placeholder="Tijd" value="<?= $reservation->time ?? '' ?>" id="time" name="time">
+                        <input class="input is-info" type="text" placeholder="Achternaam" value="<?= $user->last_name ?? '' ?>" id="last-name" name="last-name">
                         <span class="icon is-small is-left">
-                                <i class="fas fa-clock"></i>
+                                <i class="fas fa-person"></i>
                             </span>
                     </div>
                 </div>
                 <div class="field m-6">
-                    <label for="lane"></label>
-                    <div class="control">
-                        <div class="select">
-                            <select name="lane" id="lane">
-                                <option value="1">Baan 1</option>
-                                <option value="2">Baan 2</option>
-                                <option value="3">Baan 3</option>
-                                <option value="4">Baan 4</option>
-                                <option value="5" selected="selected">Baan 5</option>
-                                <option value="6">Baan 6</option>
-                                <option value="7">Baan 7</option>
-                                <option value="8">Baan 8</option>
-                                <option value="9">Baan 9</option>
-                                <option value="10">Baan 10</option>
-                            </select>
-                        </div>
+                    <label class="label" for="phone">Telefoonnummer</label>
+                    <div class="control has-icons-left">
+                        <input class="input is-info" type="number" placeholder="Telefoonnummer" value="<?= $user->phone ?? '' ?>" id="phone" name="phone">
+                        <span class="icon is-small is-left">
+                                <i class="fas fa-phone"></i>
+                            </span>
+                    </div>
+                </div>
+
+                <div class="field m-6">
+                    <label class="label" for="knsa">KNSA-Nummer</label>
+                    <div class="control has-icons-left">
+                        <input class="input is-info" type="number" placeholder="KNSA-Nummer" value="<?= $user->knsa ?? '' ?>" id="knsa" disabled>
+                        <span class="icon is-small is-left">
+                                <i class="fas fa-hashtag"></i>
+                            </span>
+                    </div>
+                </div>
+                <div class="field m-6">
+                    <label class="label" for="email">Email</label>
+                    <div class="control has-icons-left">
+                        <input class="input is-info" type="text" placeholder="Email" value="<?= $user->email ?? '' ?>" id="email" name="email">
+                        <span class="icon is-small is-left">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                    </div>
+                </div>
+                <div class="field m-6">
+                    <label class="label" for="password">Wachtwoord</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input is-info" type="password" placeholder="Wachtwoord" value="" id="password" name="password">
+                        <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                            </span>
                     </div>
                 </div>
                 <div class="field m-6 is-flex is-justify-content-center">
                     <div class="control">
-                        <input type="submit" name="submit" value="Sturen" class="button is-link">
+                        <input type="submit" name="submit" value="Aanpassen" class="button is-link">
                     </div>
                 </div>
             </form>
@@ -187,5 +178,3 @@
 </footer>
 </body>
 </html>
-
-

@@ -7,5 +7,5 @@ class Form
     public string $date;
     public string $time;
     public string $question;
-    public string $user_id;
+    public User $user;
 }

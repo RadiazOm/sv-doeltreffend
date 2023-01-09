@@ -18,11 +18,35 @@ input[type="radio"] {
 .login {
     background-color: #3e8ed0;
     height: 100%;
+    background-image: url(../img/shooting.png);
+    background-size: cover;
+    background-repeat: repeat;
 }
 
 .small {
     width: 35vw;
     margin-inline: auto;
+}
+
+body {
+    min-height: 100vh;
+}
+
+.footermargin {
+    margin: 200px;
+}
+
+.footermarginbig {
+    margin: 400px;
+}
+
+.is-rounded-soft {
+    border: 2px solid red;
+}
+
+.cover {
+    object-fit: cover!important;
+    object-position: center!important;
 }
 
 
