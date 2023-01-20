@@ -15,8 +15,8 @@
 <body>
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-        <a class="navbar-item" href="index.php">
-            <img src="https://bulma.io/images/bulma-logo.png" alt="Logo picture" width="112" height="28">
+        <a class="logo-item" href="index.php">
+            <img src="img/logo-sv.png" alt="Logo picture" class="logo">
         </a>
     </div>
 
@@ -45,7 +45,7 @@
                     <span>Contact</span>
                 </span>
         </a>
-        <?php if ($session->get('user')->admin == 1): ?>
+        <?php if ($session->get('user')->admin > 0): ?>
             <a href="reservations.php" class="navbar-item">
                 <span class="icon-text">
                     <span class="icon">
@@ -60,6 +60,15 @@
                         <i class="fa-solid fa-inbox"></i>
                     </span>
                     <span>Formulieren</span>
+                </span>
+            </a>
+        <?php endif; if ($session->get('user')->admin == 2): ?>
+            <a href="users.php" class="navbar-item">
+                <span class="icon-text">
+                    <span class="icon">
+                        <i class="fa-solid fa-person"></i>
+                    </span>
+                    <span>Leden</span>
                 </span>
             </a>
         <?php endif; ?>
@@ -106,9 +115,9 @@
                 <span class="select">
                     <select name="filter">
                         <option value="">Sorteer bij</option>
-                        <option value="date">Datum en tijd</option>
-                        <option value="user_id">Naam</option>
-                        <option value="weapon_id">Wapen</option>
+                        <option value="date" <?= isset($_GET['filter']) && $_GET['filter'] == 'date' ? 'selected' : ''?>>Datum en tijd</option>
+                        <option value="user_id" <?= isset($_GET['filter']) && $_GET['filter'] == 'user_id' ? 'selected' : ''?>>Naam</option>
+                        <option value="weapon_id" <?= isset($_GET['filter']) && $_GET['filter'] == 'weapon_id' ? 'selected' : ''?>>Wapen</option>
                     </select>
                 </span>
         </p>
@@ -150,7 +159,7 @@
                 <td><?= $reservation->stance ?></td>
                 <td><?= $reservation->date ?></td>
                 <td><?= $reservation->time ?></td>
-                <td><?= $reservation->user->first_name ?></td>
+                <td><?= $reservation->user->first_name . ' ' . $reservation->user->last_name ?></td>
                 <td><?= $reservation->lane ?></td>
                 <td><a href="reservation_detail.php?id=<?= $reservation->id ?>">Details</a></td>
                 <td><a href="reservation_edit.php?id=<?= $reservation->id ?>">Edit</a></td>

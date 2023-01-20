@@ -34,9 +34,9 @@ if (isset($_POST['submit'])) {
     $formData = new Data($_POST);
     $reservation = new Reservation();
     $reservation->weapon = $weapon;
-    $reservation->stance = $_POST['stance'] ?? '';
-    $reservation->time = $_POST['time'];
-    $reservation->lane = $_POST['lane'];
+    $reservation->stance = $formData->getPostVar('stance');
+    $reservation->time = $formData->getPostVar('time');
+    $reservation->lane = $formData->getPostVar('lane');
     $user = $session->get('user');
     $reservation->user = $user;
     $reservation->date = date('y', time() - 2628000 * $monthsBack) . '-' . date('n', time() - 2628000 * $monthsBack) . '-' . $date;

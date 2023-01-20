@@ -1,6 +1,6 @@
 <?php
 /** @var Session $session */
-if (!$session->keyExists('user') || $session->get('user')->admin != 1) {
+if (!$session->keyExists('user') || $session->get('user')->admin < 1) {
     header('Location: login.php');
     exit;
 }
@@ -14,11 +14,13 @@ $weapons = $db->getWeapons();
 $db =  new DatabaseInserter(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 if (isset($_POST['submit'])) {
-    $reservation->weapon->id = $_POST['weapon-id'];
-    $reservation->stance = $_POST['stance'];
-    $reservation->time = $_POST['time'];
-    $reservation->lane = $_POST['lane'];
-    $reservation->date = $_POST['date'];
+    $formData = new Data($_POST);
+
+    $reservation->weapon->id = $formData->getPostVar('weapon-id');
+    $reservation->stance = $formData->getPostVar('stance');
+    $reservation->time = $formData->getPostVar('time');
+    $reservation->lane = $formData->getPostVar('lane');
+    $reservation->date = $formData->getPostVar('date');
 
     $validator = new ReservationValidator($reservation);
     $validator->validate();

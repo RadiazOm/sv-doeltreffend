@@ -12,7 +12,7 @@ class FormValidator implements Validator
 
     public function validate(): void
     {
-        if ($this->form->user_id == '') {
+        if ($this->form->user == '') {
             $this->errors[] = 'Username and email cannot be empty';
         }
         if ($this->form->question == '') {

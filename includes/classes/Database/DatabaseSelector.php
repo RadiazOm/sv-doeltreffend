@@ -41,7 +41,7 @@ class DatabaseSelector extends Database
     public function getFormsByQuestion(string $query, string $filter = null): array
     {
         if (isset($filter) && $filter != '') {
-            $statement = $this->connection->prepare("SELECT * FROM forms SELECT forms.*, users.first_name as user_name FROM forms 
+            $statement = $this->connection->prepare("SELECT forms.*, users.first_name as user_name FROM forms 
                                                         LEFT JOIN users ON users.id = forms.user_id
                                                         WHERE question LIKE :query ORDER BY $filter");
         } else {
@@ -130,7 +130,7 @@ class DatabaseSelector extends Database
 
     public function getReservations(): array
     {
-        $statement = $this->connection->query('SELECT reservations.*, weapons.name AS weapon_name, users.first_name AS user_name FROM reservations
+        $statement = $this->connection->query('SELECT reservations.*, weapons.name AS weapon_name, users.first_name AS user_name, users.last_name AS last_name FROM reservations
                                                   LEFT JOIN users ON users.id = reservations.user_id
                                                   LEFT JOIN weapons ON weapons.id = reservations.weapon_id');
 
@@ -145,6 +145,7 @@ class DatabaseSelector extends Database
             $user           = new User();
             $user->id       = $row['user_id'];
             $user->first_name = $row['user_name'];
+            $user->last_name = $row['last_name'];
             $reservation->user     = $user;
             $weapon = new Weapon();
             $weapon->name = $row['weapon_name'];
@@ -156,7 +157,7 @@ class DatabaseSelector extends Database
 
     public function getReservationById(int $id): Reservation
     {
-        $statement = $this->connection->prepare('SELECT reservations.*, weapons.name AS weapon_name, users.first_name AS user_name, reservations.id AS reservation_id FROM reservations
+        $statement = $this->connection->prepare('SELECT reservations.*, weapons.name AS weapon_name, users.first_name AS user_name, users.last_name AS last_name, reservations.id AS reservation_id FROM reservations
                                                   LEFT JOIN users ON users.id = reservations.user_id
                                                   LEFT JOIN weapons ON weapons.id = reservations.weapon_id
                                                   WHERE reservations.id = :id');
@@ -174,6 +175,7 @@ class DatabaseSelector extends Database
             $user           = new User();
             $user->id       = $row['user_id'];
             $user->first_name = $row['user_name'];
+            $user->last_name = $row['last_name'];
             $reservation->user     = $user;
             $weapon = new Weapon();
             $weapon->name = $row['weapon_name'];
@@ -191,7 +193,7 @@ class DatabaseSelector extends Database
                                                   LEFT JOIN weapons ON weapons.id = reservations.weapon_id
                                                   WHERE users.first_name LIKE :query ORDER BY $filter");
         } else {
-            $statement = $this->connection->prepare("SELECT reservations.*, weapons.name AS weapon_name, users.first_name AS user_name, reservations.id AS reservation_id FROM reservations
+            $statement = $this->connection->prepare("SELECT reservations.*, weapons.name AS weapon_name, users.first_name AS user_name, users.last_name AS last_name, reservations.id AS reservation_id FROM reservations
                                                   LEFT JOIN users ON users.id = reservations.user_id
                                                   LEFT JOIN weapons ON weapons.id = reservations.weapon_id
                                                   WHERE users.first_name LIKE :query");
@@ -211,6 +213,7 @@ class DatabaseSelector extends Database
             $user           = new User();
             $user->id       = $row['user_id'];
             $user->first_name = $row['user_name'];
+            $user->last_name = $row['last_name'];
             $reservation->user     = $user;
             $weapon = new Weapon();
             $weapon->name = $row['weapon_name'];
@@ -218,6 +221,11 @@ class DatabaseSelector extends Database
             $reservations[] = $reservation;
         }
         return $reservations;
+    }
+
+    public function getUsers(): array
+    {
+        return $this->connection->query('SELECT * FROM users')->fetchAll(\PDO::FETCH_CLASS, '\\User');
     }
 
 

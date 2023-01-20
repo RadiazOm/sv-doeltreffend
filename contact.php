@@ -14,8 +14,8 @@
 <body>
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" href="index.php">
-                <img src="https://bulma.io/images/bulma-logo.png" alt="Logo picture" width="112" height="28">
+            <a class="logo-item" href="index.php">
+                <img src="img/logo-sv.png" alt="Logo picture" class="logo">
             </a>
         </div>
 
@@ -44,7 +44,7 @@
                     <span>Contact</span>
                 </span>
             </a>
-            <?php if ($session->get('user')->admin == 1): ?>
+            <?php if ($session->get('user')->admin > 0): ?>
                 <a href="reservations.php" class="navbar-item">
                 <span class="icon-text">
                     <span class="icon">
@@ -59,6 +59,15 @@
                         <i class="fa-solid fa-inbox"></i>
                     </span>
                     <span>Formulieren</span>
+                </span>
+                </a>
+            <?php endif; if ($session->get('user')->admin == 2): ?>
+                <a href="users.php" class="navbar-item">
+                <span class="icon-text">
+                    <span class="icon">
+                        <i class="fa-solid fa-person"></i>
+                    </span>
+                    <span>Leden</span>
                 </span>
                 </a>
             <?php endif; ?>
@@ -95,36 +104,18 @@
         </section>
     <?php endif; ?>
     <div class="section">
-        <div class="container">
-            <div class="box m-6 has-background-light">
+        <div class="container is-flex is-justify-content-center">
+            <div class="box m-6 has-background-light small">
                 <form action="" method="post">
                     <h1 class="title is-1 has-text-centered">Contact</h1>
-                    <div class="field m-6">
-                        <label class="label" for="name">Naam</label>
-                        <div class="control has-icons-left has-icons-right">
-                            <input class="input is-info" type="text" placeholder="Naam" value="" id="name">
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-user"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="field m-6">
-                        <label class="label" for="email">E-mail</label>
-                        <div class="control has-icons-left has-icons-right">
-                            <input class="input is-info" type="text" placeholder="E-mail" value="" id="email">
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-envelope"></i>
-                            </span>
-                        </div>
-                    </div>
                     <div class="field m-6">
                         <label class="label" for="subject">Onderwerp</label>
                         <div class="control">
                             <div class="select">
                                 <select id="subject" name="subject">
                                     <option value="">Kies een onderwerp</option>
-                                    <option value="technical">Technisch probleem</option>
-                                    <option value="other">Anders</option>
+                                    <option value="technical" <?= isset($form->subject) && $form->subject == 'technical' ? 'selected' : ''?>>Technisch probleem</option>
+                                    <option value="other" <?= isset($form->subject) && $form->subject == 'other' ? 'selected' : ''?>>Anders</option>
                                 </select>
                             </div>
                         </div>
@@ -132,7 +123,7 @@
                     <div class="field m-6">
                         <label class="label" for="message">Bericht</label>
                         <div class="control">
-                            <textarea class="textarea" placeholder="Bericht" id="message" name="message"></textarea>
+                            <textarea class="textarea" placeholder="Bericht" id="message" name="message"><?= $form->question ?? '' ?></textarea>
                         </div>
                     </div>
                     <div class="field m-6">

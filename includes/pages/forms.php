@@ -1,6 +1,6 @@
 <?php
 /** @var Session $session */
-if (!$session->keyExists('user') || $session->get('user')->admin != 1) {
+if (!$session->keyExists('user') || $session->get('user')->admin < 1) {
     header('Location: login.php');
     exit;
 }
@@ -13,7 +13,6 @@ $formClass->setForms($db->getForms());
 //Get variables for template
 $forms = $formClass->getForms();
 $totalForms = $formClass->getTotalForms();
-
 
 if (isset($_GET['query'])) {
     if (isset($_GET['filter'])) {

@@ -14,8 +14,8 @@
 <body>
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-        <a class="navbar-item" href="index.php">
-            <img src="https://bulma.io/images/bulma-logo.png" alt="Logo picture" width="112" height="28">
+        <a class="logo-item" href="index.php">
+            <img src="img/logo-sv.png" alt="Logo picture" class="logo">
         </a>
     </div>
 
@@ -44,7 +44,7 @@
                     <span>Contact</span>
                 </span>
         </a>
-        <?php if ($session->get('user')->admin == 1): ?>
+        <?php if ($session->get('user')->admin > 0): ?>
             <a href="reservations.php" class="navbar-item">
                 <span class="icon-text">
                     <span class="icon">
@@ -59,6 +59,15 @@
                         <i class="fa-solid fa-inbox"></i>
                     </span>
                     <span>Formulieren</span>
+                </span>
+            </a>
+        <?php endif; if ($session->get('user')->admin == 2): ?>
+            <a href="users.php" class="navbar-item">
+                <span class="icon-text">
+                    <span class="icon">
+                        <i class="fa-solid fa-person"></i>
+                    </span>
+                    <span>Leden</span>
                 </span>
             </a>
         <?php endif; ?>
@@ -106,7 +115,7 @@
             <h2 class="subtitle is-3">Edit</h2>
             <form action="" method="post">
                 <div class="field m-6">
-                    <label for="weapon"></label>
+                    <label class="label" for="weapon">Wapen</label>
                     <div class="control">
                         <div class="select">
                             <select name="weapon-id" id="weapon">
@@ -118,7 +127,7 @@
                     </div>
                 </div>
                 <div class="field m-6">
-                    <label for="weapon"></label>
+                    <label class="label" for="stance">Stand</label>
                     <div class="control">
                         <div class="select">
                             <select name="stance" id="stance">
@@ -148,7 +157,7 @@
                     </div>
                 </div>
                 <div class="field m-6">
-                    <label for="lane"></label>
+                    <label class="label" for="lane">Baan</label>
                     <div class="control">
                         <div class="select">
                             <select name="lane" id="lane">

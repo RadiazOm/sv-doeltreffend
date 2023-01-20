@@ -15,7 +15,7 @@ class ReservationValidator implements Validator
         if ($this->reservation->user == '') {
             $this->errors[] = 'Please be logged in to make a reservation';
         }
-        if ($this->reservation->lane > 10 || $this->reservation->lane < 0) {
+        if ($this->reservation->lane > 10 || $this->reservation->lane < 1) {
             $this->errors[] = 'Please choose a valid lane';
         }
         if ($this->reservation->date == '') {
@@ -24,6 +24,9 @@ class ReservationValidator implements Validator
         $dateCheck = explode("-", $this->reservation->date, 3);
         if (count($dateCheck) < 3 || !checkdate($dateCheck[1], $dateCheck[2], $dateCheck[0])) {
             $this->errors[] = 'Please input a valid date';
+        }
+        if (strtotime($this->reservation->date) < time()) {
+            $this->errors[] = 'Date cannot be in the past';
         }
         if ($this->reservation->time == '') {
             $this->errors[] = 'Time cannot be empty';

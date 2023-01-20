@@ -7,14 +7,15 @@ if ($session->keyExists('user')) {
 }
 
 if (isset($_POST['submit'])) {
+    $formData = new Data($_POST);
 
     $newUser = new User();
-    $newUser->first_name = $_POST['first-name'];
-    $newUser->last_name = $_POST['last-name'];
-    $newUser->knsa = $_POST['knsa'];
-    $newUser->password = $_POST['password'];
-    $newUser->phone = $_POST['phone'];
-    $newUser->email = $_POST['email'];
+    $newUser->first_name = $formData->getPostVar('first-name');
+    $newUser->last_name = $formData->getPostVar('last-name');
+    $newUser->knsa = $formData->getPostVar('knsa');
+    $newUser->password = $formData->getPostVar('password');
+    $newUser->phone = $formData->getPostVar('phone');
+    $newUser->email = $formData->getPostVar('email');
 
     try {
         $user = User::getByKNSA($newUser->knsa, $connection);

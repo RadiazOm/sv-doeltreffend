@@ -13,7 +13,8 @@ if (isset($_POST['submit'])) {
     $form->time = date('H') . ':' . date('i');
     $form->question = $_POST['message'];
     // Don't have user table set up yet so i cant do this, therefore we defualt to user 1 :) lucky him
-    $form->user_id = '1';
+    $form->user = new User();
+    $form->user = $session->get('user');
 
     $validator = new FormValidator($form);
     $validator->validate();

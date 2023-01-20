@@ -4,6 +4,7 @@ require_once 'settings.php';
 require_once 'classes/Utils/Session.php';
 require_once 'classes/Utils/Data.php';
 require_once 'classes/Users/User.php';
+require_once 'classes/Users/Users.php';
 require_once 'classes/Date/Date.php';
 require_once 'classes/interfaces/Validator.php';
 require_once 'classes/Reservation/ReservationValidator.php';

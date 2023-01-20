@@ -23,7 +23,7 @@ class DatabaseInserter extends Database
             ':date' => $form->date,
             ':time' => $form->time,
             ':message' => $form->question,
-            ':user_id' => $form->user_id
+            ':user_id' => $form->user->id
         ]);
     }
 

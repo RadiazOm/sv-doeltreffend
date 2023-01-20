@@ -105,27 +105,55 @@
     </section>
 <?php endif; ?>
 
-<div class="container">
-    <div class="is-flex is-align-items-center is-flex-direction-column">
-        <h1 class="title is-1">Are u sure?</h1>
-        <h2 class="subtitle is-2"><?= $form->subject ?></h2>
-        <div class="box">
-            <h2 class="subtitle is-4"><?= $form->question ?></h2>
-        </div>
-        <form action="" method="post">
-            <div class="field m-6">
-                <div class="control">
-                    <input type="submit" name="submit" value="Delete" class="button is-danger">
-                </div>
-            </div>
-        </form>
-        <div class="control">
-            <a href="forms.php" class="button is-link is-light">Cancel</a>
-        </div>
+
+
+<div class="container is-flex is-flex-direction-column">
+
+    <div class="control my-6 is-align-self-flex-start">
+        <a href="user_create.php" class="button is-link">Create</a>
     </div>
+
+    <table class="table is-striped">
+        <thead>
+        <tr>
+            <th>Voornaam</th>
+            <th>Achternaam</th>
+            <th>KNSA-Nummer</th>
+            <th>Email</th>
+            <th>Telefoon nummer</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <td colspan="5" class="has-text-centered">Total: <?= $totalUsers ?></td>
+        </tr>
+        </tfoot>
+        <tbody>
+        <?php /** @var User $users */
+        foreach ($users as $user) { ?>
+            <tr>
+                <td><?= $user->first_name ?></td>
+                <td><?= $user->last_name ?></td>
+                <td><?= $user->knsa ?></td>
+                <td><?= $user->email ?></td>
+                <td><?= $user->phone?></td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
 </div>
-
-
-
+<div class="footermargin"></div>
+<footer class="footer has-background-dark">
+    <div class="content has-text-centered has-text-white">
+        <p>
+            S.V. Doeltreffend reserserveringsysteem gemaakt door <a href="https://github.com/RadiazOm">Jeffrey van Otterloo</a>. Deze website is gemaakt met
+            <a href="https://bulma.io">Bulma</a>
+            <br>
+            © S.V. Doeltreffend
+        </p>
+    </div>
+</footer>
 </body>
 </html>
+
+

@@ -15,8 +15,8 @@
 <body>
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-        <a class="navbar-item" href="index.php">
-            <img src="https://bulma.io/images/bulma-logo.png" alt="Logo picture" width="112" height="28">
+        <a class="logo-item" href="index.php">
+            <img src="img/logo-sv.png" alt="Logo picture" class="logo">
         </a>
     </div>
 
@@ -45,7 +45,7 @@
                     <span>Contact</span>
                 </span>
         </a>
-        <?php if ($session->get('user')->admin == 1): ?>
+        <?php if ($session->get('user')->admin > 0): ?>
             <a href="reservations.php" class="navbar-item">
                 <span class="icon-text">
                     <span class="icon">
@@ -60,6 +60,15 @@
                         <i class="fa-solid fa-inbox"></i>
                     </span>
                     <span>Formulieren</span>
+                </span>
+            </a>
+        <?php endif; if ($session->get('user')->admin == 2): ?>
+            <a href="users.php" class="navbar-item">
+                <span class="icon-text">
+                    <span class="icon">
+                        <i class="fa-solid fa-person"></i>
+                    </span>
+                    <span>Leden</span>
                 </span>
             </a>
         <?php endif; ?>
@@ -143,16 +152,17 @@
                         <div class="control">
                             <div class="select">
                                 <select name="lane" id="lane">
-                                    <option value="1">Baan 1</option>
-                                    <option value="2">Baan 2</option>
-                                    <option value="3">Baan 3</option>
-                                    <option value="4">Baan 4</option>
-                                    <option value="5">Baan 5</option>
-                                    <option value="6">Baan 6</option>
-                                    <option value="7">Baan 7</option>
-                                    <option value="8">Baan 8</option>
-                                    <option value="9">Baan 9</option>
-                                    <option value="10">Baan 10</option>
+                                    <option value="0" <?= isset($reservation->lane) && $reservation->lane == '0' ? 'selected' : '' ?>>Kies een baan</option>
+                                    <option value="1" <?= isset($reservation->lane) && $reservation->lane == '1' ? 'selected' : '' ?>>Baan 1</option>
+                                    <option value="2" <?= isset($reservation->lane) && $reservation->lane == '2' ? 'selected' : '' ?>>Baan 2</option>
+                                    <option value="3" <?= isset($reservation->lane) && $reservation->lane == '3' ? 'selected' : '' ?>>Baan 3</option>
+                                    <option value="4" <?= isset($reservation->lane) && $reservation->lane == '4' ? 'selected' : '' ?>>Baan 4</option>
+                                    <option value="5" <?= isset($reservation->lane) && $reservation->lane == '5' ? 'selected' : '' ?>>Baan 5</option>
+                                    <option value="6" <?= isset($reservation->lane) && $reservation->lane == '6' ? 'selected' : '' ?>>Baan 6</option>
+                                    <option value="7" <?= isset($reservation->lane) && $reservation->lane == '7' ? 'selected' : '' ?>>Baan 7</option>
+                                    <option value="8" <?= isset($reservation->lane) && $reservation->lane == '8' ? 'selected' : '' ?>>Baan 8</option>
+                                    <option value="9" <?= isset($reservation->lane) && $reservation->lane == '9' ? 'selected' : '' ?>>Baan 9</option>
+                                    <option value="10" <?= isset($reservation->lane) && $reservation->lane == '10' ? 'selected' : '' ?>>Baan 10</option>
                                 </select>
                             </div>
                         </div>

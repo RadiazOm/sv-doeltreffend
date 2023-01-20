@@ -21,6 +21,39 @@ input[type="radio"] {
     background-image: url(../img/shooting.png);
     background-size: cover;
     background-repeat: repeat;
+    background-position: left;
+}
+
+.logo {
+    height: 100%;
+    width: 100px;
+    object-fit: contain;
+
+}
+
+.logo-item {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-item:hover {
+    background-color: #343c8f!important;
+}
+
+.navbar-link:not(.is-arrowless)::after {
+    border-color: white;
+}
+
+.navbar-link {
+    background-color: #414BB2!important;
+}
+
+.navbar-link:hover {
+    background-color: #343c8f!important;
+}
+
+.navbar-dropdown {
+    background-color: #414BB2;
 }
 
 .small {
@@ -45,8 +78,17 @@ body {
 }
 
 .cover {
-    object-fit: cover!important;
+    object-fit: contain!important;
     object-position: center!important;
+}
+
+nav {
+    background-color: #414BB2 !important;
+    color: white!important;
+}
+
+nav div a {
+    color: white!important;
 }
 
 
